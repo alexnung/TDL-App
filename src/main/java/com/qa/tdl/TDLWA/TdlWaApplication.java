@@ -8,6 +8,8 @@ public class TdlWaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TdlWaApplication.class, args);
+		// Getting the ApplicationContext
+		
 	}
 
 }
