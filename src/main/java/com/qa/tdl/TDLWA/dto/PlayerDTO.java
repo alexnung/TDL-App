@@ -1,46 +1,27 @@
-package com.qa.tdl.TDLWA.data.model;
+package com.qa.tdl.TDLWA.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+public class PlayerDTO {
 
-@Entity
-public class Player {
-
-	@Id
-	@Column(name = "squad_number", unique = true)
-	@NotNull
 	private int squad_number;
 	
-	@NotNull
 	private String name;
 	
-	@NotNull
 	private String position;
 	
-	@NotNull
 	private int joined;
 	
-	@NotNull
-	@Min(1)
-	@Max(6)
 	private int contract_length;
 	
-	@NotNull
 	private int contract_signed;
 	
-	@NotNull
 	private int age;
 	
-	@NotNull
-	private float salary;
+	public PlayerDTO() {
+		super();
+	}
 
-	public Player(@NotNull int squad_number, @NotNull String name, @NotNull String position, @NotNull int joined,
-			@NotNull @Min(1) @Max(6) int contract_length, @NotNull int contract_signed, @NotNull int age,
-			@NotNull float salary) {
+	public PlayerDTO(int squad_number, String name, String position, int joined, int contract_length,
+			int contract_signed, int age) {
 		super();
 		this.squad_number = squad_number;
 		this.name = name;
@@ -49,7 +30,6 @@ public class Player {
 		this.contract_length = contract_length;
 		this.contract_signed = contract_signed;
 		this.age = age;
-		this.salary = salary;
 	}
 
 	public int getSquad_number() {
@@ -108,14 +88,6 @@ public class Player {
 		this.age = age;
 	}
 
-	public float getSalary() {
-		return salary;
-	}
-
-	public void setSalary(float salary) {
-		this.salary = salary;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -126,7 +98,6 @@ public class Player {
 		result = prime * result + joined;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((position == null) ? 0 : position.hashCode());
-		result = prime * result + Float.floatToIntBits(salary);
 		result = prime * result + squad_number;
 		return result;
 	}
@@ -139,7 +110,7 @@ public class Player {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Player other = (Player) obj;
+		PlayerDTO other = (PlayerDTO) obj;
 		if (age != other.age)
 			return false;
 		if (contract_length != other.contract_length)
@@ -158,18 +129,16 @@ public class Player {
 				return false;
 		} else if (!position.equals(other.position))
 			return false;
-		if (Float.floatToIntBits(salary) != Float.floatToIntBits(other.salary))
-			return false;
 		if (squad_number != other.squad_number)
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Player [squad_number=" + squad_number + ", name=" + name + ", position=" + position + ", joined="
+		return "PlayerDTO [squad_number=" + squad_number + ", name=" + name + ", position=" + position + ", joined="
 				+ joined + ", contract_length=" + contract_length + ", contract_signed=" + contract_signed + ", age="
-				+ age + ", salary=" + salary + "]";
+				+ age + "]";
 	}
 	
 }
