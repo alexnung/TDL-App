@@ -46,7 +46,7 @@ public class PlayerController {
 	}
 	
 	// localhost:8080/player/Squad Number/1
-	@GetMapping("/squadNumber/{squadNumber}")
+	@GetMapping("/squadnumber/{squadnumber}")
 	public ResponseEntity<PlayerDTO> getPlayerBySquadNumber(@PathVariable("squadNumber") Integer squadNumber) {
 		PlayerDTO player = playerService.readBySquadNumber(squadNumber);
 		return new ResponseEntity<PlayerDTO>(player, HttpStatus.OK);
@@ -66,7 +66,7 @@ public class PlayerController {
 		return new ResponseEntity<PlayerDTO>(newPlayer, headers, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/{squadNumber}")
+	@PutMapping("/{squadnumber}")
 	public ResponseEntity<PlayerDTO> updatePlayer(@PathVariable("squadNumber") int squadNumber,
 										   @RequestBody Player player) {
 		PlayerDTO updatedPlayer = playerService.updatePlayer(squadNumber, player);
@@ -74,7 +74,7 @@ public class PlayerController {
 		return new ResponseEntity<PlayerDTO>(updatedPlayer, HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{squadNumber}")
+	@DeleteMapping("/{squadnumber}")
 	public ResponseEntity<Boolean> deletePLayer(@PathVariable("squadNumber") int squadNumber) {		
 		return new ResponseEntity<Boolean>(playerService.deletePlayer(squadNumber), HttpStatus.OK);
 	}
