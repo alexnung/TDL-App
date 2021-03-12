@@ -41,8 +41,8 @@ public class Player {
 	@NotNull
 	private float salary;
 
-	@ManyToOne(targetEntity = GroupedPositions.class, fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_groupPositions")
+	@ManyToOne(targetEntity = GroupedPositions.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_id")
 	private GroupedPositions groupedPositions;
 
 	public Player() {

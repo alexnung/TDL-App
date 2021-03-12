@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.tdl.TDLWA.data.model.GroupedPositions;
+import com.qa.tdl.TDLWA.dto.GroupedPositionsDTO;
 
 @RestController
 @RequestMapping("/GroupedPositions")
@@ -46,9 +47,9 @@ public class GroupedPositionsController {
 		return new ResponseEntity<GroupedPositionsDTO>(newGroupedPositions, headers, HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping("/{groupedpositions}")
-	public ResponseEntity<Boolean> deleteDuck(@PathVariable("groupedPositions") String groupPositions) {		
-		return new ResponseEntity<Boolean>(groupedPositionsService.deleteGroupedPositions(groupPositions), HttpStatus.OK);
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Boolean> deleteDuck(@PathVariable("id") Integer id) {		
+		return new ResponseEntity<Boolean>(groupedPositionsService.deleteId(id), HttpStatus.OK);
 	}
 	
 }
