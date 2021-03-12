@@ -2,7 +2,10 @@ package com.qa.tdl.TDLWA.data.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -14,32 +17,49 @@ public class Player {
 	@Column(name = "squad_number", unique = true)
 	@NotNull
 	private int squadNumber;
-	
+
 	@NotNull
 	private String name;
-	
+
 	@NotNull
 	private String position;
-	
+
 	@NotNull
 	private int joined;
-	
+
 	@NotNull
 	@Min(1)
 	@Max(6)
 	private int contractLength;
-	
+
 	@NotNull
 	private int contractSigned;
-	
+
 	@NotNull
 	private int age;
-	
+
 	@NotNull
 	private float salary;
 
+	@ManyToOne(targetEntity = GroupedPositions.class, fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_groupPositions")
+	private GroupedPositions groupedPositions;
+
 	public Player() {
 		super();
+	}
+
+	public Player(@NotNull String name, @NotNull String position, @NotNull int joined,
+			@NotNull @Min(1) @Max(6) int contractLength, @NotNull int contractSigned, @NotNull int age,
+			@NotNull float salary) {
+		super();
+		this.name = name;
+		this.position = position;
+		this.joined = joined;
+		this.contractLength = contractLength;
+		this.contractSigned = contractSigned;
+		this.age = age;
+		this.salary = salary;
 	}
 
 	public Player(@NotNull int squadNumber, @NotNull String name, @NotNull String position, @NotNull int joined,
@@ -54,6 +74,21 @@ public class Player {
 		this.contractSigned = contractSigned;
 		this.age = age;
 		this.salary = salary;
+	}
+
+	public Player(@NotNull int squadNumber, @NotNull String name, @NotNull String position, @NotNull int joined,
+			@NotNull @Min(1) @Max(6) int contractLength, @NotNull int contractSigned, @NotNull int age,
+			@NotNull float salary, GroupedPositions groupedPositions) {
+		super();
+		this.squadNumber = squadNumber;
+		this.name = name;
+		this.position = position;
+		this.joined = joined;
+		this.contractLength = contractLength;
+		this.contractSigned = contractSigned;
+		this.age = age;
+		this.salary = salary;
+		this.groupedPositions = groupedPositions;
 	}
 
 	public int getSquadNumber() {
@@ -120,11 +155,19 @@ public class Player {
 		this.salary = salary;
 	}
 
+	public GroupedPositions getGroupedPositions() {
+		return groupedPositions;
+	}
+
+	public void setGroupedPositions(GroupedPositions groupedPositions) {
+		this.groupedPositions = groupedPositions;
+	}
+
 	@Override
 	public String toString() {
 		return "Player [squadNumber=" + squadNumber + ", name=" + name + ", position=" + position + ", joined=" + joined
 				+ ", contractLength=" + contractLength + ", contractSigned=" + contractSigned + ", age=" + age
-				+ ", salary=" + salary + "]";
+				+ ", salary=" + salary + ", groupedPositions=" + groupedPositions + "]";
 	}
 
 	@Override
@@ -134,6 +177,7 @@ public class Player {
 		result = prime * result + age;
 		result = prime * result + contractLength;
 		result = prime * result + contractSigned;
+		result = prime * result + ((groupedPositions == null) ? 0 : groupedPositions.hashCode());
 		result = prime * result + joined;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((position == null) ? 0 : position.hashCode());
@@ -157,6 +201,11 @@ public class Player {
 			return false;
 		if (contractSigned != other.contractSigned)
 			return false;
+		if (groupedPositions == null) {
+			if (other.groupedPositions != null)
+				return false;
+		} else if (!groupedPositions.equals(other.groupedPositions))
+			return false;
 		if (joined != other.joined)
 			return false;
 		if (name == null) {
@@ -176,5 +225,4 @@ public class Player {
 		return true;
 	}
 
-	
 }
