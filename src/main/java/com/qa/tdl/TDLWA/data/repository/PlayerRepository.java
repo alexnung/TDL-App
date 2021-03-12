@@ -9,14 +9,14 @@ import com.qa.tdl.TDLWA.data.model.Player;
 
 public interface PlayerRepository extends JpaRepository<Player, Integer> {
     
-	@Query("SELECT p FROM PLayer d WHERE d.squad_number = ?1")
-	public Player findBySquadNumberJPQL(int squad_number);
-	public List<Player> findByNameJPQL(String name);
-	public List<Player> findByPositionJPQL(String position);
-    public List<Player> findByJoinedJPQL(int joined);
-    public List<Player> findByContractLengthJPQL(int contract_length);
-    public List<Player> findByContractSignedJPQL(int contract_signed);
-    public List<Player> findByAgeJPQL(int age);
-    public List<Player> findBySalaryJPQL(float salary);
+	@Query("SELECT p FROM Player p WHERE p.squadNumber = ?1")
+	public Player findBySquadNumberJPQL(int squadNumber);
+	public List<Player> findByName(String name);
+	public List<Player> findByPosition(String position);
+    public List<Player> findByJoined(int joined);
+    public List<Player> findByContractLength(int contractLength);
+    public List<Player> findByContractSigned(int contractSigned);
+    public List<Player> findByAge(int age);
+    public List<Player> findBySalary(float salary);
 	
 }
