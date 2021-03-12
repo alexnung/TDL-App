@@ -18,16 +18,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.tdl.TDLWA.data.model.GroupedPositions;
 import com.qa.tdl.TDLWA.dto.GroupedPositionsDTO;
+import com.qa.tdl.TDLWA.service.GroupedPositionsService;
 
 @RestController
 @RequestMapping("/GroupedPositions")
 public class GroupedPositionsController {
 
-	private GroupedPositionsService groupPositionsService;
+	private GroupedPositionsService groupedPositionsService;
 	
 	@Autowired
 	public GroupedPositionsController(GroupedPositionsService groupedPositionsService) {
-		this.groupPositionsService = groupedPositionsService;
+		this.groupedPositionsService = groupedPositionsService;
 	}
 	
 	@GetMapping
@@ -42,14 +43,14 @@ public class GroupedPositionsController {
 		GroupedPositionsDTO newGroupedPositions = groupedPositionsService.createGroupedPositions(groupedPositions);
 		
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Location", String.valueOf(newGroupPositions.get()));
+		headers.add("Location", String.valueOf(newGroupedPositions.getId()));
 	
 		return new ResponseEntity<GroupedPositionsDTO>(newGroupedPositions, headers, HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Boolean> deleteDuck(@PathVariable("id") Integer id) {		
-		return new ResponseEntity<Boolean>(groupedPositionsService.deleteId(id), HttpStatus.OK);
+	public ResponseEntity<Boolean> deleteGroupedPositions(@PathVariable("id") Integer id) {		
+		return new ResponseEntity<Boolean>(groupedPositionsService.deleteGroupedPositions(id), HttpStatus.OK);
 	}
 	
 }
