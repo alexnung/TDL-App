@@ -13,7 +13,7 @@ public class Player {
 	@Id
 	@Column(name = "squad_number", unique = true)
 	@NotNull
-	private int squad_number;
+	private int squadNumber;
 	
 	@NotNull
 	private String name;
@@ -27,10 +27,10 @@ public class Player {
 	@NotNull
 	@Min(1)
 	@Max(6)
-	private int contract_length;
+	private int contractLength;
 	
 	@NotNull
-	private int contract_signed;
+	private int contractSigned;
 	
 	@NotNull
 	private int age;
@@ -38,26 +38,30 @@ public class Player {
 	@NotNull
 	private float salary;
 
-	public Player(@NotNull int squad_number, @NotNull String name, @NotNull String position, @NotNull int joined,
-			@NotNull @Min(1) @Max(6) int contract_length, @NotNull int contract_signed, @NotNull int age,
+	public Player() {
+		super();
+	}
+
+	public Player(@NotNull int squadNumber, @NotNull String name, @NotNull String position, @NotNull int joined,
+			@NotNull @Min(1) @Max(6) int contractLength, @NotNull int contractSigned, @NotNull int age,
 			@NotNull float salary) {
 		super();
-		this.squad_number = squad_number;
+		this.squadNumber = squadNumber;
 		this.name = name;
 		this.position = position;
 		this.joined = joined;
-		this.contract_length = contract_length;
-		this.contract_signed = contract_signed;
+		this.contractLength = contractLength;
+		this.contractSigned = contractSigned;
 		this.age = age;
 		this.salary = salary;
 	}
 
-	public int getSquad_number() {
-		return squad_number;
+	public int getSquadNumber() {
+		return squadNumber;
 	}
 
-	public void setSquad_number(int squad_number) {
-		this.squad_number = squad_number;
+	public void setSquadNumber(int squadNumber) {
+		this.squadNumber = squadNumber;
 	}
 
 	public String getName() {
@@ -84,20 +88,20 @@ public class Player {
 		this.joined = joined;
 	}
 
-	public int getContract_length() {
-		return contract_length;
+	public int getContractLength() {
+		return contractLength;
 	}
 
-	public void setContract_length(int contract_length) {
-		this.contract_length = contract_length;
+	public void setContractLength(int contractLength) {
+		this.contractLength = contractLength;
 	}
 
-	public int getContract_signed() {
-		return contract_signed;
+	public int getContractSigned() {
+		return contractSigned;
 	}
 
-	public void setContract_signed(int contract_signed) {
-		this.contract_signed = contract_signed;
+	public void setContractSigned(int contractSigned) {
+		this.contractSigned = contractSigned;
 	}
 
 	public int getAge() {
@@ -117,17 +121,24 @@ public class Player {
 	}
 
 	@Override
+	public String toString() {
+		return "Player [squadNumber=" + squadNumber + ", name=" + name + ", position=" + position + ", joined=" + joined
+				+ ", contractLength=" + contractLength + ", contractSigned=" + contractSigned + ", age=" + age
+				+ ", salary=" + salary + "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + age;
-		result = prime * result + contract_length;
-		result = prime * result + contract_signed;
+		result = prime * result + contractLength;
+		result = prime * result + contractSigned;
 		result = prime * result + joined;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((position == null) ? 0 : position.hashCode());
 		result = prime * result + Float.floatToIntBits(salary);
-		result = prime * result + squad_number;
+		result = prime * result + squadNumber;
 		return result;
 	}
 
@@ -142,9 +153,9 @@ public class Player {
 		Player other = (Player) obj;
 		if (age != other.age)
 			return false;
-		if (contract_length != other.contract_length)
+		if (contractLength != other.contractLength)
 			return false;
-		if (contract_signed != other.contract_signed)
+		if (contractSigned != other.contractSigned)
 			return false;
 		if (joined != other.joined)
 			return false;
@@ -160,16 +171,10 @@ public class Player {
 			return false;
 		if (Float.floatToIntBits(salary) != Float.floatToIntBits(other.salary))
 			return false;
-		if (squad_number != other.squad_number)
+		if (squadNumber != other.squadNumber)
 			return false;
 		return true;
 	}
-	
-	@Override
-	public String toString() {
-		return "Player [squad_number=" + squad_number + ", name=" + name + ", position=" + position + ", joined="
-				+ joined + ", contract_length=" + contract_length + ", contract_signed=" + contract_signed + ", age="
-				+ age + ", salary=" + salary + "]";
-	}
+
 	
 }

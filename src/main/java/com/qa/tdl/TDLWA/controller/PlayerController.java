@@ -16,10 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.tdl.TDLWA.data.model.Player;
+import com.qa.tdl.TDLWA.dto.PlayerDTO;
+import com.qa.tdl.TDLWA.service.PlayerService;
 
 @RestController
 @RequestMapping(path = "/player") // This controller has a base path of /player (localhost:8080/player)
@@ -34,21 +35,20 @@ public class PlayerController {
 		this.playerService = playerService;
 	}
 	
-	// localhost:8080/duck
+	// localhost:8080/player
 	@GetMapping
 	public ResponseEntity<List<PlayerDTO>> getAllPlayers() {
 		// Requesting our PLayerDTO data from the playerService
-		List<PlayerDTO> data = playerService.readAllPlayerss();
+		List<PlayerDTO> data = playerService.readAllPlayers();
 		
 		// returning a response of type ResponseEntity(Body, Headers, HttpStatus)
 		return new ResponseEntity<List<PlayerDTO>>(data, HttpStatus.OK);
 	}
 	
 	// localhost:8080/player/Squad Number/1
-	@GetMapping("/squad_number/{squad_number}")
-	public ResponseEntity<PlayerDTO> getPlayerBySquadNumber(@PathVariable("squad_number") Integer squad_number) {
-		PlayerDTO Player = PlayerService.readByName(squad_number);
-		
+	@GetMapping("/squadNumber/{squadNumber}")
+	public ResponseEntity<PlayerDTO> getPlayerBySquadNumber(@PathVariable("squadNumber") Integer squadNumber) {
+		PlayerDTO player = playerService.readBySquadNumber(squadNumber);
 		return new ResponseEntity<PlayerDTO>(player, HttpStatus.OK);
 	}
 	
@@ -61,23 +61,22 @@ public class PlayerController {
 		PlayerDTO newPlayer = playerService.createPlayer(player);
 		
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Location", String.valueOf(newPlayer.getSquad_Number()));
+		headers.add("Location", String.valueOf(newPlayer.getSquadNumber()));
 	
 		return new ResponseEntity<PlayerDTO>(newPlayer, headers, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/{squad_number}")
-	public ResponseEntity<PlayerDTO> updatePlayer(@PathVariable("squad_number") int squad_number,
+	@PutMapping("/{squadNumber}")
+	public ResponseEntity<PlayerDTO> updatePlayer(@PathVariable("squadNumber") int squadNumber,
 										   @RequestBody Player player) {
-		PlayerDTO updatedPlayer = playerService.updatePlayer(squad_number, player);
+		PlayerDTO updatedPlayer = playerService.updatePlayer(squadNumber, player);
 		
 		return new ResponseEntity<PlayerDTO>(updatedPlayer, HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{squad_number}")
-	public ResponseEntity<Boolean> deletePLayer(@PathVariable("squad_number") int squad_number) {		
-		return new ResponseEntity<Boolean>(playerService.deletePlayer(squad_number), HttpStatus.OK);
+	@DeleteMapping("/{squadNumber}")
+	public ResponseEntity<Boolean> deletePLayer(@PathVariable("squadNumber") int squadNumber) {		
+		return new ResponseEntity<Boolean>(playerService.deletePlayer(squadNumber), HttpStatus.OK);
 	}
-	
 	
 }

@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.qa.tdl.TDLWA.data.model.Player;
 import com.qa.tdl.TDLWA.data.repository.PlayerRepository;
+import com.qa.tdl.TDLWA.dto.PlayerDTO;
 import com.qa.tdl.TDLWA.exceptions.PlayerNotFoundException;
+import com.qa.tdl.TDLWA.mappers.PlayerMapper;
 
 @Service
 public class PlayerService {
@@ -28,15 +30,15 @@ public class PlayerService {
 
 	public List<PlayerDTO> readAllPlayers() {
 		List<Player> players = playerRepository.findAll();
-		List<PlayerDTO> duckDTOs = new ArrayList<PlayerDTO>();
+		List<PlayerDTO> playerDTOs = new ArrayList<PlayerDTO>();
 
 		players.forEach(player -> playerDTOs.add(playerMapper.mapToDTO(player)));
 
 		return playerDTOs;
 	}
 
-	public PlayerDTO readBySquadNumber(Integer squad_number) {
-		Player player = playerRepository.findBySquadNumberJPQL(squad_number);
+	public PlayerDTO readBySquadNumber(Integer squadNumber) {
+		Player player = playerRepository.findBySquadNumberJPQL(squadNumber);
 
 		return playerMapper.mapToDTO(player);
 	}
@@ -44,11 +46,11 @@ public class PlayerService {
 	public PlayerDTO createPlayer(Player player) {
 		Player newPlayer = playerRepository.save(player);
 
-		return PlayerMapper.mapToDTO(newPlayer);
+		return playerMapper.mapToDTO(newPlayer);
 	}
 
-	public PlayerDTO updateDuck(Integer squad_number, Player player) throws EntityNotFoundException {
-		Optional<Player> playerInDbOpt = playerRepository.findById(squad_number);
+	public PlayerDTO updatePlayer(Integer squadNumber, Player player) throws EntityNotFoundException {
+		Optional<Player> playerInDbOpt = playerRepository.findById(squadNumber);
 		Player playerInDb;
 
 		if (playerInDbOpt.isPresent()) {
@@ -60,23 +62,23 @@ public class PlayerService {
 		playerInDb.setName(player.getName());
 		playerInDb.setPosition(player.getPosition());
 		playerInDb.setJoined(player.getJoined());
-		playerInDb.setContract_length(player.getContract_length());
-		playerInDb.setContract_signed(player.getContract_signed());
+		playerInDb.setContractLength(player.getContractLength());
+		playerInDb.setContractSigned(player.getContractSigned());
 		playerInDb.setAge(player.getAge());
 		playerInDb.setSalary(player.getSalary());
 
-		Player playerDuck = playerRepository.save(playerInDb);
+		Player updatedPlayer = playerRepository.save(playerInDb);
 
-		return playerMapper.mapToDTO(playerDuck);
+		return playerMapper.mapToDTO(updatedPlayer);
 	}
 
-	public boolean deletePLayer(Integer squad_number) {
-		if (!playerRepository.existsById(squad_number)) {
+	public boolean deletePlayer(Integer squadNumber) {
+		if (!playerRepository.existsById(squadNumber)) {
 			throw new PlayerNotFoundException();
 		}
-		playerRepository.deleteById(squad_number);
+		playerRepository.deleteById(squadNumber);
 
-		boolean exists = playerRepository.existsById(squad_number);
+		boolean exists = playerRepository.existsById(squadNumber);
 
 		return !exists;
 	}
