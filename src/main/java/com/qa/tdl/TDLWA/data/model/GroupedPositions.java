@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,6 +20,10 @@ import org.hibernate.annotations.OnDeleteAction;
 public class GroupedPositions {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
+	
 	@NotNull
 	@Column(name = "groupPosition", unique = true)
 	private String groupPosition;
@@ -32,6 +38,20 @@ public class GroupedPositions {
 	public GroupedPositions(String groupPosition) {
 		super();
 		this.groupPosition = groupPosition;
+	}
+
+	public GroupedPositions(int id, @NotNull String groupPosition) {
+		super();
+		this.id = id;
+		this.groupPosition = groupPosition;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getGroupPosition() {
@@ -55,6 +75,8 @@ public class GroupedPositions {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((groupPosition == null) ? 0 : groupPosition.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((players == null) ? 0 : players.hashCode());
 		return result;
 	}
 
@@ -72,12 +94,19 @@ public class GroupedPositions {
 				return false;
 		} else if (!groupPosition.equals(other.groupPosition))
 			return false;
+		if (id != other.id)
+			return false;
+		if (players == null) {
+			if (other.players != null)
+				return false;
+		} else if (!players.equals(other.players))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "GroupedPositions [groupPosition=" + groupPosition + "]";
+		return "GroupedPositions [id=" + id + ", groupPosition=" + groupPosition + ", players=" + players + "]";
 	}
 
 }
