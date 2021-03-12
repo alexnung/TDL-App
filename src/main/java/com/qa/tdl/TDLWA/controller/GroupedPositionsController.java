@@ -21,7 +21,7 @@ import com.qa.tdl.TDLWA.dto.GroupedPositionsDTO;
 import com.qa.tdl.TDLWA.service.GroupedPositionsService;
 
 @RestController
-@RequestMapping("/GroupedPositions")
+@RequestMapping("/groupedpositions")
 public class GroupedPositionsController {
 
 	private GroupedPositionsService groupedPositionsService;

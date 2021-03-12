@@ -41,17 +41,14 @@ public class Player {
 	@NotNull
 	private float salary;
 
-	@ManyToOne(targetEntity = GroupedPositions.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_id")
+	@ManyToOne(targetEntity = GroupedPositions.class, fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_grouped_positions_id")
 	private GroupedPositions groupedPositions;
 
 	public Player() {
-		super();
 	}
 
-	public Player(@NotNull String name, @NotNull String position, @NotNull int joined,
-			@NotNull @Min(1) @Max(6) int contractLength, @NotNull int contractSigned, @NotNull int age,
-			@NotNull float salary) {
+	public Player(String name, String position, int joined, int contractLength, int contractSigned, int age, float salary) {
 		super();
 		this.name = name;
 		this.position = position;
@@ -62,9 +59,7 @@ public class Player {
 		this.salary = salary;
 	}
 
-	public Player(@NotNull int squadNumber, @NotNull String name, @NotNull String position, @NotNull int joined,
-			@NotNull @Min(1) @Max(6) int contractLength, @NotNull int contractSigned, @NotNull int age,
-			@NotNull float salary) {
+	public Player(int squadNumber, String name, String position, int joined, int contractLength, int contractSigned, int age, float salary) {
 		super();
 		this.squadNumber = squadNumber;
 		this.name = name;
@@ -76,9 +71,7 @@ public class Player {
 		this.salary = salary;
 	}
 
-	public Player(@NotNull int squadNumber, @NotNull String name, @NotNull String position, @NotNull int joined,
-			@NotNull @Min(1) @Max(6) int contractLength, @NotNull int contractSigned, @NotNull int age,
-			@NotNull float salary, GroupedPositions groupedPositions) {
+	public Player(int squadNumber, String name, String position, int joined, int contractLength, int contractSigned, int age, float salary, GroupedPositions groupedPositions) {
 		super();
 		this.squadNumber = squadNumber;
 		this.name = name;

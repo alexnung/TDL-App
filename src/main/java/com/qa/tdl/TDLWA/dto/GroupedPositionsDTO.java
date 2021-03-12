@@ -8,7 +8,7 @@ public class GroupedPositionsDTO {
 
 	private String groupPosition;
 
-	private List<PlayerDTO> Player;
+	private List<PlayerDTO> players;
 
 	public GroupedPositionsDTO() {
 	}
@@ -17,7 +17,7 @@ public class GroupedPositionsDTO {
 		super();
 		this.id = id;
 		this.groupPosition = groupPosition;
-		this.Player = player;
+		this.players = player;
 	}
 
 	public int getId() {
@@ -36,19 +36,19 @@ public class GroupedPositionsDTO {
 		this.groupPosition = groupPosition;
 	}
 
-	public List<PlayerDTO> getPlayer() {
-		return Player;
+	public List<PlayerDTO> getPlayers() {
+		return players;
 	}
 
-	public void setPlayer(List<PlayerDTO> player) {
-		Player = player;
+	public void setPlayers(List<PlayerDTO> player) {
+		players = player;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Player == null) ? 0 : Player.hashCode());
+		result = prime * result + ((players == null) ? 0 : players.hashCode());
 		result = prime * result + ((groupPosition == null) ? 0 : groupPosition.hashCode());
 		result = prime * result + id;
 		return result;
@@ -63,10 +63,10 @@ public class GroupedPositionsDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		GroupedPositionsDTO other = (GroupedPositionsDTO) obj;
-		if (Player == null) {
-			if (other.Player != null)
+		if (players == null) {
+			if (other.players != null)
 				return false;
-		} else if (!Player.equals(other.Player))
+		} else if (!players.equals(other.players))
 			return false;
 		if (groupPosition == null) {
 			if (other.groupPosition != null)
@@ -80,7 +80,7 @@ public class GroupedPositionsDTO {
 
 	@Override
 	public String toString() {
-		return "GroupedPositionsDTO [id=" + id + ", groupPosition=" + groupPosition + ", Player=" + Player + "]";
+		return "GroupedPositionsDTO [id=" + id + ", groupPosition=" + groupPosition + ", players=" + players + "]";
 	}
 
 }

@@ -16,15 +16,16 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Table(name = "groupedPositions")
+@Table(name = "grouped_positions")
 public class GroupedPositions {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "grouped_positions_id")
 	private int id;
 	
 	@NotNull
-	@Column(name = "groupPosition", unique = true)
+	@Column(name = "group_position", unique = true)
 	private String groupPosition;
 
 	@OneToMany(mappedBy = "groupedPositions", fetch = FetchType.LAZY, orphanRemoval = true)
@@ -75,7 +76,6 @@ public class GroupedPositions {
 		int result = 1;
 		result = prime * result + ((groupPosition == null) ? 0 : groupPosition.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((players == null) ? 0 : players.hashCode());
 		return result;
 	}
 
@@ -95,17 +95,12 @@ public class GroupedPositions {
 			return false;
 		if (id != other.id)
 			return false;
-		if (players == null) {
-			if (other.players != null)
-				return false;
-		} else if (!players.equals(other.players))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "GroupedPositions [id=" + id + ", groupPosition=" + groupPosition + ", players=" + players + "]";
+		return "GroupedPositions [id=" + id + ", groupPosition=" + groupPosition;
 	}
 
 }
