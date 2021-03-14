@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ControllerAdviceExceptionHandlers {
 
-	@ExceptionHandler (value = PlayerNotFoundException.class)
-	public ResponseEntity<String> PlayerNotFoundException(PlayerNotFoundException pnfe) {
-		
-		return new ResponseEntity<String>(pnfe.getMessage(),HttpStatus.OK);
+	@ExceptionHandler(value = TaskNotFoundException.class)
+	public ResponseEntity<String> TaskNotFoundException(TaskNotFoundException tnfe) {
+
+		return new ResponseEntity<String>(tnfe.getMessage(), HttpStatus.OK);
 	}
-	
+
 }
