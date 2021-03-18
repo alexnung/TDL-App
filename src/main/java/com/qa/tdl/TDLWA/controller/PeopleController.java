@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,6 +39,12 @@ public class PeopleController {
 		return new ResponseEntity<List<PeopleDTO>>(data, HttpStatus.OK);
 	}
 
+	@GetMapping("/id/{id}")
+	public ResponseEntity<PeopleDTO> getPeopleById(@PathVariable("id") Integer id) {
+		PeopleDTO people = peopleService.readById(id);
+		return new ResponseEntity<PeopleDTO>(people, HttpStatus.OK);
+	}
+
 	@PostMapping
 	public ResponseEntity<PeopleDTO> createPeople(@Valid @RequestBody People people) {
 		PeopleDTO newPeople = peopleService.createPeople(people);
@@ -48,9 +55,16 @@ public class PeopleController {
 		return new ResponseEntity<PeopleDTO>(newPeople, headers, HttpStatus.CREATED);
 	}
 
+	@PutMapping("/id/{id}")
+	public ResponseEntity<PeopleDTO> updatePeople(@PathVariable("id") int id, @RequestBody People people) {
+		PeopleDTO updatedPeople = peopleService.updatePeople(id, people);
+
+		return new ResponseEntity<PeopleDTO>(updatedPeople, HttpStatus.OK);
+	}
+
 	@DeleteMapping("/id/{id}")
 	public ResponseEntity<Boolean> deletePeople(@PathVariable("id") int id) {
-		return new ResponseEntity<Boolean>(peopleService.deletePeople(id), HttpStatus.OK);
+		return new ResponseEntity<Boolean>(peopleService.deletePeople(id), HttpStatus.NO_CONTENT);
 	}
 
 }

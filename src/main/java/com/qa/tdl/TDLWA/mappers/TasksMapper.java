@@ -21,7 +21,7 @@ public class TasksMapper {
 		return this.modelMapper.map(tasks, TasksDTO.class);
 	}
 
-	public Tasks mapToPlayer(TasksDTO tasksDTO) {
+	public Tasks mapToTasks(TasksDTO tasksDTO) {
 		return this.modelMapper.map(tasksDTO, Tasks.class);
 	}
 }
