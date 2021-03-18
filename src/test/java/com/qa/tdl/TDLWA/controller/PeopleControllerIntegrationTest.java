@@ -18,14 +18,16 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.qa.tdl.TDLWA.data.model.People;
 import com.qa.tdl.TDLWA.data.model.Tasks;
+import com.qa.tdl.TDLWA.dto.PeopleDTO;
 import com.qa.tdl.TDLWA.dto.TasksDTO;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc // configures the MockMvc object (used to send requests to our API)
 @Sql(scripts = { "classpath:test-schema.sql",
 		"classpath:test-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-public class TasksControllerIntegrationTest {
+public class PeopleControllerIntegrationTest {
 
 	@Autowired
 	private MockMvc mvc;
@@ -33,60 +35,60 @@ public class TasksControllerIntegrationTest {
 	@Autowired
 	private ObjectMapper objectMapper;
 
-//	private Tasks validTask = new Tasks(1, "Eric", "08/04/2021", "Ongoing", "N/A");
-	private TasksDTO taskDTO = new TasksDTO(1, "Eric", "08/04/2021", "Ongoing");
+//	private People validPeople = new People(1, "Eric", "analyst");
+	private PeopleDTO peopleDTO = new PeopleDTO(1, "Eric", "analyst", List.of(new TasksDTO(1, "Eric", "08/04/2021", "Ongoing")));
 
-//	private List<Tasks> validTasks = List.of(validTask);
-	private List<TasksDTO> validTasksDTO = List.of(taskDTO);
+//  private List<People> validPeople = List.of(validPeople);
+	private List<PeopleDTO> validPeopleDTO = List.of(peopleDTO);
 
 	@Test
-	public void createTasksTest() throws Exception {
-		Tasks tasksToSave = new Tasks("Eric", "08/04/2021", "Ongoing", "n/a");
-		TasksDTO expectedTasks = new TasksDTO(2, "Eric", "08/04/2021", "Ongoing");
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.POST, "/tasks");
+	public void createPeopleTest() throws Exception {
+		People peopleToSave = new People("Eric", "analyst");
+		PeopleDTO expectedPeople = new PeopleDTO(2, "Eric", "analyst", null);
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.POST, "/people");
 		mockRequest.contentType(MediaType.APPLICATION_JSON);
-		mockRequest.content(objectMapper.writeValueAsString(tasksToSave));
+		mockRequest.content(objectMapper.writeValueAsString(peopleToSave));
 		mockRequest.accept(MediaType.APPLICATION_JSON);
 		ResultMatcher statusMatcher = MockMvcResultMatchers.status().isCreated();
 		ResultMatcher contentMatcher = MockMvcResultMatchers.content()
-				.json(objectMapper.writeValueAsString(expectedTasks));
+				.json(objectMapper.writeValueAsString(expectedPeople));
 		ResultMatcher headerMatcher = MockMvcResultMatchers.header().string("Location", "2");
 		mvc.perform(mockRequest).andExpect(statusMatcher).andExpect(contentMatcher).andExpect(headerMatcher);
 
 	}
 
 	@Test
-	public void getAllTasksTest() throws Exception {
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.GET, "/tasks");
+	public void getAllPeopleTest() throws Exception {
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.GET, "/people");
 		mockRequest.accept(MediaType.APPLICATION_JSON);
 
 		ResultMatcher statusMatcher = MockMvcResultMatchers.status().isOk();
 		ResultMatcher contentMatcher = MockMvcResultMatchers.content()
-				.json(objectMapper.writeValueAsString(validTasksDTO));
+				.json(objectMapper.writeValueAsString(validPeopleDTO));
 
 		mvc.perform(mockRequest).andExpect(statusMatcher).andExpect(contentMatcher);
 	}
-
+	
 	@Test
-	public void getTasksByIdTest() throws Exception {
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.GET, "/tasks/id/1");
+	public void getPeopleByIdTest() throws Exception {
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.GET, "/people/id/1");
 		mockRequest.accept(MediaType.APPLICATION_JSON);
 
 		ResultMatcher statusMatcher = MockMvcResultMatchers.status().isOk();
-		ResultMatcher contentMatcher = MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(taskDTO));
+		ResultMatcher contentMatcher = MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(peopleDTO));
 
 		mvc.perform(mockRequest).andExpect(statusMatcher).andExpect(contentMatcher);
 	}
 
 	@Test
 	public void updateTasksTest() throws Exception {
-		Tasks tasksToSave = new Tasks("Eric", "08/04/2021", "Ongoing", "N/A");
-		TasksDTO expectedTasks = new TasksDTO(1, "Eric", "08/04/2021", "Ongoing");
+		People peopleToSave = new People("Eric", "analyst");
+		PeopleDTO expectedPeople = new PeopleDTO(1, "Eric", "analyst", null);
 
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.PUT, "/tasks/id/1");
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.PUT, "/people/id/1");
 
 		mockRequest.contentType(MediaType.APPLICATION_JSON); // Mime-Type
-		mockRequest.content(objectMapper.writeValueAsString(tasksToSave)); // sending Duck in
+		mockRequest.content(objectMapper.writeValueAsString(peopleToSave)); // sending Duck in
 
 		// Specify what data type we expect in response
 		mockRequest.accept(MediaType.APPLICATION_JSON);
@@ -94,14 +96,14 @@ public class TasksControllerIntegrationTest {
 		ResultMatcher statusMatcher = MockMvcResultMatchers.status().isOk();
 
 		ResultMatcher contentMatcher = MockMvcResultMatchers.content()
-				.json(objectMapper.writeValueAsString(expectedTasks)); // expecting DuckDTO back
+				.json(objectMapper.writeValueAsString(expectedPeople)); // expecting DuckDTO back
 
 		mvc.perform(mockRequest).andExpect(statusMatcher).andExpect(contentMatcher);
 	}
 
 	@Test
 	public void deleteTasksTest() throws Exception {
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.DELETE, "/tasks/id/1");
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.DELETE, "/people/id/1");
 		mockRequest.accept(MediaType.APPLICATION_JSON);
 
 		ResultMatcher statusMatcher = MockMvcResultMatchers.status().isNoContent();
@@ -109,5 +111,5 @@ public class TasksControllerIntegrationTest {
 
 		mvc.perform(mockRequest).andExpect(statusMatcher).andExpect(contentMatcher);
 	}
-
+	
 }

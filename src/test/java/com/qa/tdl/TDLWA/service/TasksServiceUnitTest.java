@@ -66,17 +66,17 @@ public class TasksServiceUnitTest {
 
 	@Test
 	public void getTasksByIdTest() {
-		when(tasksRepository.existsById(Mockito.any(Integer.class))).thenReturn(true);
-		when(tasksRepository.findByIdJPQL(Mockito.any(Integer.class))).thenReturn(validTasks);
+		when(tasksRepository.existsById(validTasksDTO.getId())).thenReturn(true);
+		when(tasksRepository.findByIdJPQL(validTasksDTO.getId())).thenReturn(validTasks);
 		when(tasksMapper.mapToDTO(validTasks)).thenReturn(validTasksDTO);
-		assertThat(validTasksDTO).isEqualTo(tasksService.readById(Mockito.any(Integer.class)));
-		verify(tasksRepository, times(1)).existsById(Mockito.any(Integer.class));
-		verify(tasksRepository, times(1)).findByIdJPQL(Mockito.any(Integer.class));
+		assertThat(validTasksDTO).isEqualTo(tasksService.readById(validTasksDTO.getId()));
+		verify(tasksRepository, times(1)).existsById(validTasksDTO.getId());
+		verify(tasksRepository, times(1)).findByIdJPQL(validTasksDTO.getId());
 		verify(tasksMapper, times(1)).mapToDTO(validTasks);
 	}
 /*
 	@Test
-	public void getTasksByIdExceptionTest() {
+	public void getTasksByIdExceptionTest() throws?{
 		tasksDTO.clear();
 		when(tasksRepository.existsById(Mockito.any(Integer.class))).thenReturn(false);
 		when(tasksRepository.findByIdJPQL(Mockito.any(Integer.class))).thenReturn(validEmptyTasksDTO);
