@@ -21,7 +21,7 @@ public class PeopleMapper {
 		return this.modelMapper.map(people, PeopleDTO.class);
 	}
 
-	public People mapToPond(PeopleDTO peopleDTO) {
+	public People mapToPeople(PeopleDTO peopleDTO) {
 		return this.modelMapper.map(peopleDTO, People.class);
 	}
 

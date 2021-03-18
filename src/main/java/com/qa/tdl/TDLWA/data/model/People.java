@@ -30,7 +30,7 @@ public class People {
 	@NotNull
 	private String title;
 
-	@OneToMany(mappedBy = "people", fetch = FetchType.LAZY, orphanRemoval = true)
+	@OneToMany(mappedBy = "people", fetch = FetchType.LAZY)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Tasks> tasks;
 
