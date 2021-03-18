@@ -52,6 +52,11 @@ public class PeopleServiceIntegrationTest {
 		assertThat(peopleDTO).isEqualTo(peopleInDb);
 	}
 
+	/*
+	 * @Test public void readByIdTest() {
+	 * assertThat(validPeopleDTO).isEqualTo(peopleService.readById(validPeople.getId
+	 * ())); }
+	 */
 	@Test
 	public void createPeopleTest() {
 		People newPeople = new People(1, "Eric", "analyst", new ArrayList<Tasks>());
@@ -63,7 +68,7 @@ public class PeopleServiceIntegrationTest {
 
 	@Test
 	public void updatePeopleTest() {
-		People newPeople = new People(5, "Eric", "analyst", new ArrayList<Tasks>());
+		People newPeople = new People(6, "Eric", "analyst", new ArrayList<Tasks>());
 		PeopleDTO newPeopleDTO = peopleMapper.mapToDTO(newPeople);
 		PeopleDTO toPeopleDTO = peopleService.updatePeople(validPeople.getId(), newPeople);
 		assertThat(newPeopleDTO).isEqualTo(toPeopleDTO);

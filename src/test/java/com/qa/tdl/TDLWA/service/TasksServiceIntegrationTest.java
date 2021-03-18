@@ -76,7 +76,7 @@ public class TasksServiceIntegrationTest {
 
 	@Test
 	public void updateTasksTest() {
-		Tasks newTasks = new Tasks(5, "Eric", "08/04/2021", "Ongoing", "N/A");
+		Tasks newTasks = new Tasks(7, "Eric", "08/04/2021", "Ongoing", "N/A");
 		TasksDTO newTasksDTO = tasksMapper.mapToDTO(newTasks);
 		TasksDTO toTasksDTO = tasksService.updateTasks(validTasks.getId(), newTasks);
 		assertThat(newTasksDTO).isEqualTo(toTasksDTO);
