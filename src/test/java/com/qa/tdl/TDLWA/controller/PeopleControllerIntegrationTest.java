@@ -19,7 +19,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.tdl.TDLWA.data.model.People;
-import com.qa.tdl.TDLWA.data.model.Tasks;
 import com.qa.tdl.TDLWA.dto.PeopleDTO;
 import com.qa.tdl.TDLWA.dto.TasksDTO;
 
@@ -36,7 +35,8 @@ public class PeopleControllerIntegrationTest {
 	private ObjectMapper objectMapper;
 
 //	private People validPeople = new People(1, "Eric", "analyst");
-	private PeopleDTO peopleDTO = new PeopleDTO(1, "Eric", "analyst", List.of(new TasksDTO(1, "Eric", "08/04/2021", "Ongoing")));
+	private PeopleDTO peopleDTO = new PeopleDTO(1, "Eric", "analyst",
+			List.of(new TasksDTO(1, "Eric", "08/04/2021", "Ongoing")));
 
 //  private List<People> validPeople = List.of(validPeople);
 	private List<PeopleDTO> validPeopleDTO = List.of(peopleDTO);
@@ -68,7 +68,7 @@ public class PeopleControllerIntegrationTest {
 
 		mvc.perform(mockRequest).andExpect(statusMatcher).andExpect(contentMatcher);
 	}
-	
+
 	@Test
 	public void getPeopleByIdTest() throws Exception {
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.GET, "/people/id/1");
@@ -111,5 +111,5 @@ public class PeopleControllerIntegrationTest {
 
 		mvc.perform(mockRequest).andExpect(statusMatcher).andExpect(contentMatcher);
 	}
-	
+
 }
