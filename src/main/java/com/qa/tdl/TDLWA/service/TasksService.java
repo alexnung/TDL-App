@@ -38,6 +38,9 @@ public class TasksService {
 	}
 
 	public TasksDTO readById(Integer id) {
+		if (!tasksRepository.existsById(id)) {
+			throw new TaskNotFoundException("Input existing ID");
+		}
 		Tasks tasks = tasksRepository.findByIdJPQL(id);
 
 		return tasksMapper.mapToDTO(tasks);
@@ -59,7 +62,7 @@ public class TasksService {
 			throw new TaskNotFoundException("Input existing ID");
 		}
 
-		tasksInDb.setId(tasks.getId());
+//		tasksInDb.setId(tasks.getId());
 		tasksInDb.setTask(tasks.getTask());
 		tasksInDb.setDueDate(tasks.getDueDate());
 		tasksInDb.setStatus(tasks.getStatus());
@@ -72,7 +75,7 @@ public class TasksService {
 
 	public boolean deleteTask(Integer id) {
 		if (!tasksRepository.existsById(id)) {
-			throw new TaskNotFoundException();
+			throw new TaskNotFoundException("Input existing ID");
 		}
 		tasksRepository.deleteById(id);
 

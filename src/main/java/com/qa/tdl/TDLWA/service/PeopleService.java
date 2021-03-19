@@ -2,6 +2,7 @@ package com.qa.tdl.TDLWA.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 import com.qa.tdl.TDLWA.data.model.People;
 import com.qa.tdl.TDLWA.data.repository.PeopleRepository;
 import com.qa.tdl.TDLWA.dto.PeopleDTO;
+import com.qa.tdl.TDLWA.exceptions.PersonNotFoundException;
+import com.qa.tdl.TDLWA.exceptions.TaskNotFoundException;
 import com.qa.tdl.TDLWA.mappers.PeopleMapper;
 
 @Service
@@ -37,24 +40,54 @@ public class PeopleService {
 		return newPerson;
 	}
 
+	public PeopleDTO readById(Integer id) {
+		if (!peopleRepository.existsById(id)) {
+			throw new PersonNotFoundException("Input existing ID");
+		}
+		People people = peopleRepository.findByIdJPQL(id);
+
+		return peopleMapper.mapToDTO(people);
+	}
+
 	public PeopleDTO createPeople(People people) {
 		People savedPeople = peopleRepository.save(people);
 
 		return peopleMapper.mapToDTO(savedPeople);
 	}
 
-	public Boolean deletePeople(Integer id) {
+	@Transactional
+	public PeopleDTO updatePeople(Integer id, People people) throws EntityNotFoundException {
+		Optional<People> peopleInDbOpt = peopleRepository.findById(id);
+		People peopleInDb;
+
+		if (peopleInDbOpt.isPresent()) {
+			peopleInDb = peopleInDbOpt.get();
+		} else {
+			throw new TaskNotFoundException("Input existing ID");
+		}
+
+//		peopleInDb.setId(people.getId()); //dont want to edit id in database
+		peopleInDb.setName(people.getName());
+		peopleInDb.setTitle(people.getTitle());
+		peopleInDb.setTasks(people.getTasks());
+
+		People updatedPeople = peopleRepository.save(peopleInDb);
+
+		return peopleMapper.mapToDTO(updatedPeople);
+	}
+
+	public boolean deletePeople(Integer id) {
+
 		if (peopleRepository.existsById(id)) {
 			peopleRepository.deleteById(id);
 		} else {
-			throw new EntityNotFoundException();
+			throw new PersonNotFoundException("Input existing ID");
 		}
 
 		boolean doesItExistStill = peopleRepository.existsById(id);
 
-		// if doesItExistStill is true, the entity was not deleted and so false is
-		// returned
 		return !doesItExistStill;
+		 
 	}
 
 }

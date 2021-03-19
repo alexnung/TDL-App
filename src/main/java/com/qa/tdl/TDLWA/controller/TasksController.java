@@ -39,6 +39,7 @@ public class TasksController {
 	@GetMapping
 	public ResponseEntity<List<TasksDTO>> getAllTasks() {
 		// Requesting our TasksDTO data from the tasksService
+		// List<TasksDTO> data = tasksService.readAllTasks();
 		List<TasksDTO> data = tasksService.readAllTasks();
 
 		// returning a response of type ResponseEntity(Body, Headers, HttpStatus)
@@ -76,7 +77,7 @@ public class TasksController {
 
 	@DeleteMapping("/id/{id}")
 	public ResponseEntity<Boolean> deleteTask(@PathVariable("id") int id) {
-		return new ResponseEntity<Boolean>(tasksService.deleteTask(id), HttpStatus.OK);
+		return new ResponseEntity<Boolean>(tasksService.deleteTask(id), HttpStatus.NO_CONTENT);
 	}
 
 }

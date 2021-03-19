@@ -30,7 +30,7 @@ public class People {
 	@NotNull
 	private String title;
 
-	@OneToMany(mappedBy = "people", fetch = FetchType.LAZY, orphanRemoval = true)
+	@OneToMany(mappedBy = "people", fetch = FetchType.LAZY)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Tasks> tasks;
 
@@ -94,7 +94,6 @@ public class People {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((tasks == null) ? 0 : tasks.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
@@ -110,8 +109,6 @@ public class People {
 		if (getClass() != obj.getClass())
 			return false;
 		People other = (People) obj;
-		if (id != other.id)
-			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;

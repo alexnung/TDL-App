@@ -122,7 +122,7 @@ public class Tasks {
 		int result = 1;
 		result = prime * result + ((completedOnTime == null) ? 0 : completedOnTime.hashCode());
 		result = prime * result + ((dueDate == null) ? 0 : dueDate.hashCode());
-		result = prime * result + id;
+		result = prime * result + ((people == null) ? 0 : people.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((task == null) ? 0 : task.hashCode());
 		return result;
@@ -147,7 +147,10 @@ public class Tasks {
 				return false;
 		} else if (!dueDate.equals(other.dueDate))
 			return false;
-		if (id != other.id)
+		if (people == null) {
+			if (other.people != null)
+				return false;
+		} else if (!people.equals(other.people))
 			return false;
 		if (status == null) {
 			if (other.status != null)

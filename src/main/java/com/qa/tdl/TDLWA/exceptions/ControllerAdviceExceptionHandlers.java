@@ -13,5 +13,11 @@ public class ControllerAdviceExceptionHandlers {
 
 		return new ResponseEntity<String>(tnfe.getMessage(), HttpStatus.OK);
 	}
+	
+	@ExceptionHandler(value = PersonNotFoundException.class)
+	public ResponseEntity<String> PersonNotFoundException(PersonNotFoundException pnfe) {
+
+		return new ResponseEntity<String>(pnfe.getMessage(), HttpStatus.OK);
+	}
 
 }
