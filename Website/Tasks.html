@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tasks</title>
+    <title>Bootstrap 5</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="CSS/Style.css" />
+  </head>
+  <body style="background-color: rgb(225, 240, 255)">
+    <h1 id="Index-heading" style="text-align: center">Tasks</h1>
+    <div>
+        <img id="logo" src="Images/QA.png" />
+      </a>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+      <div class="container-fluid">
+        <a class="navbar-brand">Tasks</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="Index.html"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="Tasks.html">Tasks</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  href="People.html"
+                >People</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <center>
+      <img id="image1" src="Images/\list.png" />
+    </center>
+    <div id="people-form">
+        <div class=form1>
+            <form method="get" action="index.html">
+              <fieldset>
+                <legend style="padding-bottom: 15px;"></legend>
+                <!--0-->
+                <div class="container">
+                  <div class="row">
+                  <label class= "col-form-label col-sm-4 .offset-sm-4" for="tID"><B>Task ID</B></label>
+                  <div class = "col-sm-6">
+                    <input class="form-control" id="tID" type="number" placeholder="Enter ID";><br>
+                  </div>
+                </div>
+                </div>
+                 <!--0-->
+                <div class="container">
+                    <div class="row">
+                    <label class= "col-form-label col-sm-4 .offset-sm-4" for="tasks"><B>Task</B></label>
+                    <div class = "col-sm-6">
+                      <input class="form-control" id="task" type="text" placeholder="Enter Task";><br>
+                    </div>
+                  </div>
+                  </div>
+                  <!--bootstrap-->
+                  <div class="container">
+                    <div class="row">
+                    <label class= "col-form-label col-sm-4 .offset-sm-4" for="due-date"><B>Due Date</B></label>
+                    <div class = "col-sm-6">
+                      <input class="form-control" id="due-date" type="date" placeholder="Enter Due Date";><br>
+                    </div>
+                  </div>
+                  </div>
+                  <!--bootstrap-->
+                  <div class="container">
+                    <div class="container">
+                        <div class="row">
+                      <label class= "col-form-label col-sm-4 .offset-sm-4" for="status" ><B>Status</B></label>
+                      <div class = "col-sm-6">
+                      <select class="form-control" id="status" Title="status">
+                        <option value="enter" selected>Please select</option>
+                        <option value="Not Yet Started">Not Yet Started</option>
+                        <option value="Ongoing">Ongoing</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Ovedue">Overdue</option>
+                        </select><br>
+                      </div>
+                      </div>
+                      </div>
+                  </div>
+                <div class="container">
+                    <div class="container">
+                        <div class="row">
+                      <label class= "col-form-label col-sm-4 .offset-sm-4" for="completed-on-time" ><B>Completed On Time</B></label>
+                      <div class = "col-sm-6">
+                      <select class="form-control" id="completed-on-time" Title="completed-on-time">
+                        <option value="enter" selected>Please select</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="N/A">N/A</option>
+                        </select><br>
+                      </div>
+                      </div>
+                      </div>
+                  </div>
+                  <div class="container">
+                    <div class="row">
+                    <label class= "col-form-label col-sm-4 .offset-sm-4" for="people-id"><B>People ID</B></label>
+                    <div class = "col-sm-6">
+                      <input class="form-control" id="people-id" type="number" placeholder="Enter a valid people ID";>
+                    </div>
+                  </div>
+                  <div class="row" id="btns">
+                    <div class="col-md text-center">
+                      <br />
+                      <button class="btn btn-info" id="read">Read All
+                      </button>
+                      <button class="btn btn-info" id="read-one">Read Single
+                      </button>
+                      <button class="btn btn-success" id="create">Create
+                      </button>
+                      <button class="btn btn-warning" id="update">Update
+                      </button>
+                      <button class="btn btn-danger" id="delete">Delete
+                      </button>
+                    </div>
+                  </div><br>
+                  </div>
+    </div>
+    <Center>
+        <div class="button1">
+          <button type="reset" class="btn btn-secondary">Clear</button>
+        </div><br>
+          <div class="allTTable">
+            <br><table id="tasks-head" style="display:none;" class = "table">
+              <thead>
+                  <tr>
+                      <th>Task</th>
+                      <th>Due Date</th>
+                      <th>Status</th>
+                      <th>Completed On Time</th>
+                      </tr>
+                  </thead>
+              <tbody id="tasks"></tbody>
+              </table><br>
+          </div>
+          <div class="oneTTable">
+            <table id="one-task-head" style="display:none;" class = "table">
+              <thead>
+                  <tr>
+                      <th>Task</th>
+                      <th>Due Date</th>
+                      <th>Status</th>
+                      <th>Completed On Time</th>
+                      </tr>
+                  </thead>
+              <tbody id="oneTask"></tbody>
+              </table><br>
+          </div>
+        <div id="createdTaskData"></div>
+        <div id="updatedTaskData"></div>
+      </Center>
+    </div>
+
+    <hr />
+    <footer>
+        <p>Created by Alex Nung for the QA Academy TDL project</p>
+        <p id="tasks-results"></p>
+        </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+    <script src="js/Tasks.js"></script>
+  </body>
+</html>
