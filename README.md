@@ -47,6 +47,7 @@ We use [SemVer](http://semver.org/) for versioning.
 
 * **Alex Nung** - [alexnung](https://github.com/alexnung)
 * **Jira** - [jira](https://anung.atlassian.net/jira/software/projects/TWA/boards/10)
+* **GitHub** - [gitHhub](https://github.com/alexnung/TDL-App)
 
 ## License
 
