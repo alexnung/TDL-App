@@ -46,6 +46,7 @@ We use [SemVer](http://semver.org/) for versioning.
 ## Authors
 
 * **Alex Nung** - [alexnung](https://github.com/alexnung)
+* **Jira** - [jira](https://anung.atlassian.net/jira/software/projects/TWA/boards/10)
 
 ## License
 
