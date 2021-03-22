@@ -1,0 +1,45 @@
+#Index-heading {
+  color: #004050;
+}
+
+#logo {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 6%;
+  margin: 5px;
+}
+
+#hp-text {
+    border-style: dashed;
+    padding-top: 20px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#people-form {
+    border-style: dashed;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#image1 {
+  width: 100px;
+  padding-top: 30px;
+}
+
+.link-input {
+  border-style: dotted;
+  margin-top: 20px;
+}
+
+.table {
+  text-align: center;
+  width:70%;
+}
+
+footer {
+  text-align: center;
+  background-color: rgb(0, 0, 0);
+  color: white;
+}
