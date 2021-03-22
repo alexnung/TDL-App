@@ -44,8 +44,30 @@ let read_people = () => {
           temp += "<td>" + p.id + "</td>";
           temp += "<td>" + p.name + "</td>";
           temp += "<td>" + p.title + "</td>";
-          temp += "<td>" + p.tasks + "</td>";
+          temp += "<td>" + JSON.stringify(p.tasks) + "</td>";
         });
+    /*
+    temp += "<tr>";
+                    temp += "<td>" + u.pokeListId + "</td>";
+                    temp += "<td>" +u.pokeList + "</td>";
+
+                    temp += "<tr>";
+                  
+                   
+                    u.pokeTasks.forEach((task) => {console.log(JSON.stringify(task))
+                    
+                    temp += "<tr>" +task.taskId + "</tr>";
+                    temp += "<td>" +task.pokeTask + "</td>";
+                    temp += "<td>" +task.pokeTaskDescription + "</td>";
+                    temp += "<td>" +task.difficulty + "</td>";
+                    temp += "<td>" +task.date + "</td>";
+                    temp += "<td>" +task.completed + "</td>";
+
+                    })
+                    document.getElementById("PokePlanner_Table").innerHTML = temp;
+                    
+                  });
+    */    
         document.querySelector("#people").innerHTML = temp;
       }
       if (!data.length > 0) {
