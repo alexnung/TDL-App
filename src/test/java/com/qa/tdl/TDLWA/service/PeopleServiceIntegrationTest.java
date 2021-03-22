@@ -68,7 +68,7 @@ public class PeopleServiceIntegrationTest {
 
 	@Test
 	public void updatePeopleTest() {
-		People newPeople = new People(6, "Eric", "analyst", new ArrayList<Tasks>());
+		People newPeople = new People(5, "Eric", "analyst", new ArrayList<Tasks>());
 		PeopleDTO newPeopleDTO = peopleMapper.mapToDTO(newPeople);
 		PeopleDTO toPeopleDTO = peopleService.updatePeople(validPeople.getId(), newPeople);
 		assertThat(newPeopleDTO).isEqualTo(toPeopleDTO);
